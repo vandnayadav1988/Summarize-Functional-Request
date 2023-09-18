@@ -175,7 +175,7 @@ async fn handler(
             restart: true,
             system_prompt: Some(system),
         };
-        let question = "The following is a GitHub patch. Please ensure that the code is aligned with the respective files in swagger directory for pattern, basepath, required from th yaml file?".to_string() + truncate(commit, CHAR_SOFT_LIMIT);
+        let question = "The following is a GitHub patch. Please ensure that the code is aligned with the respective post_identities.yaml file for pattern, basepath, required ?".to_string() + truncate(commit, CHAR_SOFT_LIMIT);
         match openai.chat_completion(&chat_id, &question, &co).await {
             Ok(r) => {
                 if reviews_text.len() < CHAR_SOFT_LIMIT {
@@ -205,7 +205,7 @@ async fn handler(
             restart: true,
             system_prompt: Some(system),
         };
-        let question = "Here is a set of summaries for functional changes. Each summary starts with a ------ line. Please write an comprehensive summary to ensure that the code is aligned with the swagger directory for pattern, basepath, required from th yaml file?. Please first present the most important findings, in your summary.".to_string() + &reviews_text;
+        let question = "Here is a set of summaries for functional changes. Each summary starts with a ------ line. Please write an comprehensive summary to ensure that the code is aligned with the post_identities.yaml for pattern, basepath, required from th yaml file?. Please first present the most important findings, in your summary.".to_string() + &reviews_text;
         match openai.chat_completion(&chat_id, &question, &co).await {
             Ok(r) => {
                 resp.push_str(&r.choice);
