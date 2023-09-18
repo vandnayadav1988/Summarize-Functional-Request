@@ -175,7 +175,7 @@ async fn handler(
             restart: true,
             system_prompt: Some(system),
         };
-        let question = "The following is a GitHub patch. Please check if the code conforms to the respective files in swagger directory? + truncate(commit, CHAR_SOFT_LIMIT);
+        let question = "The following is a GitHub patch. Please check if the code conforms to the respective files in swagger directory? ".to_string() + truncate(commit, CHAR_SOFT_LIMIT);
         match openai.chat_completion(&chat_id, &question, &co).await {
             Ok(r) => {
                 if reviews_text.len() < CHAR_SOFT_LIMIT {
@@ -205,7 +205,7 @@ async fn handler(
             restart: true,
             system_prompt: Some(system),
         };
-        let question = "Here is a set of summaries for functional changes. Each summary starts with a ------ line. Please write an comprehensive summary considering all files in swagger directory. Please first present the most important findings, in your summary.\n\n".to_string() + &reviews_text;
+        let question = "Here is a set of summaries for functional changes. Each summary starts with a ------ line. Please write an comprehensive summary considering all files in swagger directory. Please first present the most important findings, in your summary".to_string() + &reviews_text;
         match openai.chat_completion(&chat_id, &question, &co).await {
             Ok(r) => {
                 resp.push_str(&r.choice);
