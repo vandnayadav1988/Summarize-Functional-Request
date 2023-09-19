@@ -189,7 +189,6 @@ async fn handler(
                 review.push_str("\n\n");
                 reviews.push(review);
                 log::debug!("text for push is below1 {}", review);
-                log::debug!("text for push is below3 {}", review.push_str(&r.choice));
                 log::debug!("Received OpenAI resp for patch: {}", commit_hash);
             }
             Err(e) => {
