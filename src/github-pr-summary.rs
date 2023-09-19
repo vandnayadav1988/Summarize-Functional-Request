@@ -176,6 +176,7 @@ async fn handler(
             system_prompt: Some(system),
         };
         let question = "The following is a GitHub patch. compare the code in controllers/tags/post_identities.js with swagger file at swagger/forms/post_identities.yaml ".to_string() + truncate(commit, CHAR_SOFT_LIMIT);
+        log::debug!("text for push is below {}", reviews_text);
         match openai.chat_completion(&chat_id, &question, &co).await {
             Ok(r) => {
                 if reviews_text.len() < CHAR_SOFT_LIMIT {
@@ -188,6 +189,7 @@ async fn handler(
                 review.push_str(&r.choice);
                 review.push_str("\n\n");
                 reviews.push(review);
+                log::debug!("Received OpenAI resp for patch: {}", commit_hash);
             }
             Err(e) => {
                 log::error!("OpenAI returned an error for commit {commit_hash}: {}", e);
