@@ -176,6 +176,7 @@ async fn handler(
             system_prompt: Some(system),
         };
         let question = "The following is a GitHub patch. compare the code in controllers/tags/post_identities.js with swagger file at swagger/forms/post_identities.yaml ".to_string() + truncate(commit, CHAR_SOFT_LIMIT);
+        log::debug!("text for push is below {}", reviews_text);
         match openai.chat_completion(&chat_id, &question, &co).await {
             Ok(r) => {
                 if reviews_text.len() < CHAR_SOFT_LIMIT {
