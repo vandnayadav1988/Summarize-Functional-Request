@@ -188,7 +188,6 @@ async fn handler(
                 review.push_str(&r.choice);
                 review.push_str("\n\n");
                 reviews.push(review);
-                log::debug!("Received OpenAI resp for patch: {}", review.push_str(&format!("### [Commit {commit_hash}](https://github.com/{owner}/{repo}/pull/{pull_number}/commits/{commit_hash})\n")));
             }
             Err(e) => {
                 log::error!("OpenAI returned an error for commit {commit_hash}: {}", e);
