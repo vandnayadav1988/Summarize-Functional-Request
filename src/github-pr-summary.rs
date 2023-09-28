@@ -205,7 +205,7 @@ async fn handler(
             restart: true,
             system_prompt: Some(system),
         };
-        let question = "Please compare the code controllers/tags/post_identities.js with swagger at swagger/forms/post_identities.yaml .".to_string() + &reviews_text;
+        let question = "Here is a set of summaries for functional changes. Each summary starts with a ------ line. Please compare the code controllers/tags/post_identities.js with swagger file at swagger/forms/post_identities.yaml . Please first present the most important findings, in your summary.".to_string() + &reviews_text;
         match openai.chat_completion(&chat_id, &question, &co).await {
             Ok(r) => {
                 resp.push_str(&r.choice);
